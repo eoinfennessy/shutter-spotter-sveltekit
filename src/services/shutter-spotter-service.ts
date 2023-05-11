@@ -1,5 +1,6 @@
 import axios from "axios";
 import { user } from "../stores";
+import type { NewLocation, Location } from "./shutter-spotter-types";
 
 export const shutterSpotterService = {
 	baseUrl: "http://localhost:3000",
@@ -48,4 +49,43 @@ export const shutterSpotterService = {
 			axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 		}
 	},
+
+	async createLocation(location: NewLocation, userId: string) {
+		try {
+    	const res = await axios.post(`${this.baseUrl}/api/locations`, { ...location, userId });
+			return { success: true, location: res.data as Location };
+		} catch (error) {
+			console.error(error);
+			return { success: false };
+		}
+  },
+
+  // async getLocation(id: string) {
+  //   const res = await axios.get(`${this.baseUrl}/api/locations/${id}`);
+  //   return res.data;
+  // },
+
+  // async getAllLocations() {
+  //   const res = await axios.get(`${this.baseUrl}/api/locations`);
+  //   return res.data;
+  // },
+
+  async getUserLocations(userId: string): Promise<Location[]> {
+		try {
+			const res = await axios.get(`${this.baseUrl}/api/users/${userId}/locations`);
+			return res.data as Location[];
+		} catch (error) {
+			console.error(error);
+			return [];
+		}
+  },
+
+  async deleteLocation(locationId: string, userId: string) {
+		try {
+    await axios.delete(`${this.baseUrl}/api/users/${userId}/locations/${locationId}`);
+    	return true;
+		} catch (error) {
+			return false;
+		}
+  },
 };

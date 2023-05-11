@@ -1,6 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { shutterSpotterService } from '../services/shutter-spotter-service';
+	import { user } from '../stores';
 
 	let email = "";
 	let password = "";
@@ -9,7 +10,7 @@
   async function login() {
 		const success = await shutterSpotterService.login(email, password);
 		if (success) {
-			goto("/dashboard");
+			goto(`/user/${$user._id}/dashboard`);
 		} else {
 			email = "";
 			password = "";

@@ -1,13 +1,17 @@
 <script lang="ts">
+  import { user } from "../stores";
 	import type { Location } from "../services/shutter-spotter-types";
+	import { shutterSpotterService } from "$services/shutter-spotter-service";
 
   export let locations: Location[];
 
   async function deleteLocation(locationId: string) {
-    // TODO: Delete location from DB
-    const locationIndex = locations.findIndex((location) => location._id = locationId);
-    locations.splice(locationIndex, 1);
-    locations = locations;
+    const success = await shutterSpotterService.deleteLocation(locationId, $user._id);
+    if (success) {
+      const locationIndex = locations.findIndex((location) => location._id === locationId);
+      locations.splice(locationIndex, 1);
+      locations = locations;
+    }
   }
 </script>
 
