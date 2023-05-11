@@ -16,6 +16,10 @@
 			errorMessage = "Error Trying to sign up";
 		}
 	}
+
+	async function signupWithGithub() {
+		await shutterSpotterService.signupWithGithub();
+	}
 </script>
 
 <form on:submit|preventDefault={signup}>
@@ -71,3 +75,13 @@
 		<button class="button is-link">Sign Up</button>
 	</div>
 </form>
+
+<hr>
+<div class="block">
+	<button on:click={signupWithGithub} class="button is-black">
+		<span class="icon">
+			<i class="fab fa-github"></i>
+		</span>
+		<span>Or Continue with GitHub</span>
+	</button>
+</div>

@@ -17,6 +17,10 @@
 			errorMessage = "Invalid Credentials";
 		}
 	}
+
+	async function loginWithGithub() {
+		console.log("TODO: Log in with GitHub")
+	}
 </script>
 
 <form class="block" on:submit|preventDefault={login}>
@@ -46,6 +50,16 @@
 		<button class="button is-link">Log In</button>
 	</div>
 </form>
+
+<hr>
+<div class="block">
+	<button on:click={loginWithGithub} class="button is-black">
+		<span class="icon">
+			<i class="fab fa-github"></i>
+		</span>
+		<span>Or Login with GitHub</span>
+	</button>
+</div>
 
 {#if errorMessage}
   <div class="message is-danger">

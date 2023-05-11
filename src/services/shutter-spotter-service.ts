@@ -41,6 +41,15 @@ export const shutterSpotterService = {
 		}
 	},
 
+	async signupWithGithub() {
+		try {
+			await axios.post(`${this.baseUrl}/api/users/github`);
+			return true;
+		} catch (error) {
+			return false;
+		}
+	},
+
 	reload() {
 		const credentials = localStorage.shutterSpotter;
 		if (credentials) {
