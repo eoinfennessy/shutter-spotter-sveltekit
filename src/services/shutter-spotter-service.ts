@@ -1,6 +1,6 @@
 import axios from "axios";
 import { user } from "../stores";
-import type { NewLocation, Location } from "./shutter-spotter-types";
+import type { NewLocation, Location, Photo, PhotoApiPayload } from "./shutter-spotter-types";
 
 export const shutterSpotterService = {
 	baseUrl: "http://localhost:3000",
@@ -86,6 +86,37 @@ export const shutterSpotterService = {
     	return true;
 		} catch (error) {
 			return false;
+		}
+  },
+
+	async createPhoto(photo: PhotoApiPayload) {
+    const form = new FormData();
+    form.append("title", photo.title);
+    form.append("userId", photo.userId);
+    form.append("locationId", photo.locationId);
+    form.append("description", photo.description);
+    form.append("tags", photo.tags);
+    form.append("imagefile", new Blob([photo.imagefile]));
+    const res = await axios.post(`${this.baseUrl}/api/photos`, form);
+    return res.data;
+  },
+
+	async getLocationPhotos(locationId: string): Promise<Photo[]> {
+		try {
+			const res = await axios.get(`${this.baseUrl}/api/locations/${locationId}/photos`);
+			return res.data;
+		} catch (error) {
+			console.error(error);
+			return [];
+		}
+  },
+
+	async deletePhoto(id: string, userId: string) {
+		try {
+			await axios.delete(`${this.baseUrl}/api/users/${userId}/photos/${id}`);
+    	return true;
+		} catch (error) {
+			return false
 		}
   },
 };

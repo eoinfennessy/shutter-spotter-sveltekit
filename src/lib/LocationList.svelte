@@ -34,7 +34,7 @@
         Longitude: {location.longitude}
       <p>
     </div>
-    <a href="/location/{location._id}" class="button">
+    <a href="/user/{$user._id}/location/{location._id}" class="button">
       <span class="icon is-small">
         <i class="fas fa-folder-open"></i>
       </span>

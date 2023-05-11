@@ -1,14 +1,15 @@
 <script lang="ts">
 	import { shutterSpotterService } from "$services/shutter-spotter-service";
+	import type { LocationCategory } from "$services/shutter-spotter-types";
 	import { user } from "../stores";
 
 	export let onAdd: CallableFunction;
 
-	let name = "";
-	let description = "";
-	let category: "Landscape" | "Nature" | "Wildlife" | "Architecture" | "Macro" | "Aerial" | "Street";
-	let latitude = 0.0;
-	let longitude = 0.0;
+	let name: string;
+	let description: string;
+	let category: LocationCategory;
+	let latitude: number;
+	let longitude: number;
 
 	async function addLocation() {
 		await shutterSpotterService.createLocation({ name, description, category, latitude, longitude }, $user._id);

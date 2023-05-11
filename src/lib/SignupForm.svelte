@@ -9,7 +9,6 @@
 	let errorMessage = "";
 
 	async function signup() {
-		console.log(`attemting to sign up email: ${email}`);
 		let success = await shutterSpotterService.signup(firstName, lastName, email, password);
 		if (success) {
 			goto("/");
