@@ -6,15 +6,14 @@
 	import { onDestroy } from "svelte";
 
 	export let locations: Location[];
-	export let locationStore: Writable<Location>;
+	export let latestLocation: Writable<Location>;
 
-	const unsubscribe = locationStore.subscribe((location) => {
+	const unsubscribe = latestLocation.subscribe((location) => {
 		if (location) {
 			locations.push(location);
 			locations = locations;
 		}
 	});
-	
 	onDestroy(unsubscribe);
 
 	async function deleteLocation(locationId: string) {

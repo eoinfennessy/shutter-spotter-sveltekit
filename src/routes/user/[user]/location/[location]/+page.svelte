@@ -3,7 +3,7 @@
 	import PhotoList from '$lib/PhotoList.svelte';
 	import MainNavigator from '$lib/MainNavigator.svelte';
 	import PhotoForm from '$lib/PhotoForm.svelte';
-	import { latestPhoto } from '../../../../../stores.js';
+	import { latestPhoto } from '$src/stores';
 
 	export let data;
 </script>
