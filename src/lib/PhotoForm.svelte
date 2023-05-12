@@ -3,7 +3,7 @@
 	import { page } from "$app/stores";
 	import { user } from "../stores";
 
-	// export let onAdd: CallableFunction;
+	export let onAdd: CallableFunction;
 
 	let title = "";
 	let description = "";
@@ -13,8 +13,7 @@
 	$: imageDisplayName = imagefile ? imagefile[0].name : "No File Selected";
 
 	async function addPhoto() {
-		console.log(imagefile[0]);
-		await shutterSpotterService.createPhoto({
+		const { success, photo } = await shutterSpotterService.createPhoto({
 			userId: $user._id,
 			locationId: $page.params.location,
 			imagefile: imagefile[0],
@@ -22,10 +21,12 @@
 			description,
 			tags,
 		});
-    title = "";
-    description = "";
-    tags = "";
-		// onAdd();
+		if (success) {
+			onAdd(photo);
+			title = "";
+			description = "";
+			tags = "";
+		}
 	}
 </script>
 

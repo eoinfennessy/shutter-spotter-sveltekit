@@ -12,12 +12,14 @@
 	let longitude: number;
 
 	async function addLocation() {
-		await shutterSpotterService.createLocation({ name, description, category, latitude, longitude }, $user._id);
-		onAdd();
-		name = "";
-		description = "";
-		latitude = 0.0;
-		longitude = 0.0;
+		const { success, location } = await shutterSpotterService.createLocation({ name, description, category, latitude, longitude }, $user._id);
+		if (success) {
+			onAdd(location);
+			name = "";
+			description = "";
+			latitude = 0.0;
+			longitude = 0.0;
+		}
 	}
 </script>
 

@@ -99,15 +99,20 @@ export const shutterSpotterService = {
   },
 
 	async createPhoto(photo: PhotoApiPayload) {
-    const form = new FormData();
-    form.append("title", photo.title);
-    form.append("userId", photo.userId);
-    form.append("locationId", photo.locationId);
-    form.append("description", photo.description);
-    form.append("tags", photo.tags);
-    form.append("imagefile", new Blob([photo.imagefile]));
-    const res = await axios.post(`${this.baseUrl}/api/photos`, form);
-    return res.data;
+		try {
+			const form = new FormData();
+			form.append("title", photo.title);
+			form.append("userId", photo.userId);
+			form.append("locationId", photo.locationId);
+			form.append("description", photo.description);
+			form.append("tags", photo.tags);
+			form.append("imagefile", new Blob([photo.imagefile]));
+			const res = await axios.post(`${this.baseUrl}/api/photos`, form);
+			return { success: true, photo: res.data as Photo };
+		} catch (error) {
+			console.error(error);
+			return { success: false }
+		}
   },
 
 	async getLocationPhotos(locationId: string): Promise<Photo[]> {

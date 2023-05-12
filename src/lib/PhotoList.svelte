@@ -1,10 +1,22 @@
 <script lang="ts">
 	import type { Photo } from "../services/shutter-spotter-types";
 	import { shutterSpotterService } from "$services/shutter-spotter-service";
+	import type { Writable } from "svelte/store";
+	import { onDestroy } from "svelte";
 
 	export let photos: Photo[];
+	export let photoStore: Writable<Photo>
 
   const imageServerBaseUrl = localStorage.getItem("imageServerBaseUrl");
+
+	const unsubscribe = photoStore.subscribe((photo) => {
+		if (photo) {
+			photos.push(photo);
+			photos = photos;
+		}
+	});
+
+	onDestroy(unsubscribe);
 
 	async function deletePhoto(photoId: string, userId: string) {
 		const success = await shutterSpotterService.deletePhoto(photoId, userId);

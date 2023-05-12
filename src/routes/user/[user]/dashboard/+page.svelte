@@ -3,8 +3,7 @@
 	import LocationList from '$lib/LocationList.svelte';
 	import LocationForm from '$lib/LocationForm.svelte';
 	import MainNavigator from '$lib/MainNavigator.svelte';
-	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { latestLocation } from '../../../../stores.js';
 
 	export let data;
 </script>
@@ -15,6 +14,6 @@
 
 <section class="section">
   <h1 class="title">My Dashboard</h1>
-  <LocationList locations={data.locations} />
-  <LocationForm onAdd={() => goto($page.url.pathname, { noScroll: true, invalidateAll: true })}/>
+  <LocationList locations={data.locations} locationStore={latestLocation} />
+  <LocationForm onAdd={latestLocation.set} />
 </section>

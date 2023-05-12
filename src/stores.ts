@@ -1,3 +1,4 @@
+import type { Location, Photo } from "$services/shutter-spotter-types";
 import {writable} from "svelte/store";
 
 export const user = writable({
@@ -5,3 +6,7 @@ export const user = writable({
   email: "",
   token: "",
 });
+
+export const latestLocation = writable<Location>();
+
+export const latestPhoto = writable<Photo>();
