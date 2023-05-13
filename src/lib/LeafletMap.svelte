@@ -11,10 +11,11 @@
 	export let htmlClass = "box";
 	export let style = "";
 	export let markers: MapMarker[] = [];
-	export let latestMapMarker: Writable<MapMarker>;
+	export let latestMapMarker: Writable<MapMarker> | null = null;
+	export let initialMapPostion = markers.length ? markers[0].coordinates : { lat: 52.160858, lng: -7.15242 }
 
 	const mapConfig = {
-		location: { lat: 52.160858, lng: -7.15242 },
+		location: initialMapPostion,
 		zoom: 8,
 		minZoom: 1,
 	};
@@ -23,7 +24,6 @@
 
 	onMount(async () => {
 		map = new LeafletMap(id, mapConfig);
-
 		if (showZoomControl) map.showZoomControl();
 		markers.forEach((marker) => {
 			map.addMarker(marker.coordinates, marker.popupText, marker.layerTitle);
@@ -31,13 +31,15 @@
 		if (showLayerControl) map.showLayerControl();
 	});
 
-	const unsubscribe = latestMapMarker.subscribe((marker) => {
-		if (marker && map) {
-			map.addMarker(marker.coordinates, marker.popupText, marker.layerTitle);
-			map.moveTo(8, marker.coordinates);
-		}
-	});
-	onDestroy(unsubscribe);
+	if (latestMapMarker) {
+		const unsubscribe = latestMapMarker.subscribe((marker) => {
+			if (marker && map) {
+				map.addMarker(marker.coordinates, marker.popupText, marker.layerTitle);
+				map.moveTo(8, marker.coordinates);
+			}
+		});
+		onDestroy(unsubscribe);
+	}
 </script>
 
 <div {id} class={htmlClass} {style} />
