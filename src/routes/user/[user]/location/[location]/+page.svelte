@@ -4,6 +4,7 @@
 	import MainNavigator from '$lib/MainNavigator.svelte';
 	import PhotoForm from '$lib/PhotoForm.svelte';
 	import { latestPhoto } from '$src/stores';
+	import LocationDisplay from '$lib/LocationDisplay.svelte';
 
 	export let data;
 </script>
@@ -13,7 +14,8 @@
 </Header>
 
 <section class="section">
-  <h1 class="title">Location</h1>
+	<LocationDisplay location={data.location} />
+	<h1 class="title">Location Photos</h1>
   <PhotoList photos={data.photos} photoStore={latestPhoto} />
   <PhotoForm onAdd={latestPhoto.set} />
 </section>

@@ -4,6 +4,7 @@ import type { NewLocation, Location, Photo, PhotoApiPayload } from "./shutter-sp
 
 export const shutterSpotterService = {
 	baseUrl: "http://localhost:3000",
+	// baseUrl: "https://shutter-spotter-2.onrender.com",
 
 	async login(email: string, password: string) {
 		try {
@@ -69,10 +70,15 @@ export const shutterSpotterService = {
 		}
   },
 
-  // async getLocation(id: string) {
-  //   const res = await axios.get(`${this.baseUrl}/api/locations/${id}`);
-  //   return res.data;
-  // },
+  async getLocation(id: string, includeWeather = false) {
+		try {
+			const res = await axios.get(`${this.baseUrl}/api/locations/${id}?includeweather=${includeWeather}`);
+			return { success: true, location: res.data as Location };
+		} catch (error) {
+			console.error(error);
+			return { success: false, error };
+		}
+  },
 
   // async getAllLocations() {
   //   const res = await axios.get(`${this.baseUrl}/api/locations`);
