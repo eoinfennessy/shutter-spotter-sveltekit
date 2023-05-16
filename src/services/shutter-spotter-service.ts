@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { user } from "../stores";
 import type { NewLocation, Location, Photo, PhotoApiPayload } from "./shutter-spotter-types";
 
@@ -137,6 +137,76 @@ export const shutterSpotterService = {
     	return true;
 		} catch (error) {
 			return false
+		}
+  },
+
+	async getUserCount() {
+		try {
+			const res = await axios.get(`${this.baseUrl}/api/analytics/user-count`);
+			return { success: true, ...res.data } as { success: true, userCount: number };
+		} catch (error) {
+			console.error(error);
+			console.error(typeof error);
+			return { success: false, error } as { success: false, error: AxiosError };
+		}
+  },
+	
+	async getLocationCount() {
+		try {
+			const res = await axios.get(`${this.baseUrl}/api/analytics/location-count`);
+			return { success: true, ...res.data } as { success: true, locationCount: number };
+		} catch (error) {
+			console.error(error);
+			return { success: false, error } as { success: false, error: AxiosError };
+		}
+  },
+	
+	async getPhotoCount() {
+		try {
+			const res = await axios.get(`${this.baseUrl}/api/analytics/photo-count`);
+			return { success: true, ...res.data } as { success: true, photoCount: number };
+		} catch (error) {
+			console.error(error);
+			return { success: false, error } as { success: false, error: AxiosError };
+		}
+  },
+	
+	async getLocationCountByCategory() {
+		try {
+			const res = await axios.get(`${this.baseUrl}/api/analytics/location-count-by-category`);
+			return { success: true, ...res.data } as { success: true, locationCountByCategory: Record<string, number> };
+		} catch (error) {
+			console.error(error);
+			return { success: false, error } as { success: false, error: AxiosError };
+		}
+  },
+	
+	async getAllUserCreationTimes() {
+		try {
+			const res = await axios.get(`${this.baseUrl}/api/analytics/user-creation-times`);
+			return { success: true, userCreationTimes: res.data } as { success: true, userCreationTimes: string[] };
+		} catch (error) {
+			console.error(error);
+			return { success: false, error } as { success: false, error: AxiosError };
+		}
+  },
+
+	// async newSignupWithGithub(code: string) {
+	// 	try {
+  //   	const res = await axios.post(`${this.baseUrl}/api/users/github`, { code });
+	// 		return { success: true, res: res as any };
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 		return { success: false, error };
+	// 	}
+  // },
+	async newSignupWithGithub(code: string, client_id: string, client_secret: string, redirect_uri: string) {
+		try {
+    	const res = await axios.post("https://github.com/login/oauth/access_token", { code, client_id, client_secret, redirect_uri });
+			return { success: true, res: res as any };
+		} catch (error) {
+			console.error(error);
+			return { success: false, error };
 		}
   },
 };
