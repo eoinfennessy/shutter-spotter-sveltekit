@@ -42,15 +42,6 @@ export const shutterSpotterService = {
 		}
 	},
 
-	async signupWithGithub() {
-		try {
-			await axios.post(`${this.baseUrl}/api/users/github`);
-			return true;
-		} catch (error) {
-			return false;
-		}
-	},
-
 	reload() {
 		const credentials = localStorage.shutterSpotter;
 		if (credentials) {
@@ -191,18 +182,9 @@ export const shutterSpotterService = {
 		}
   },
 
-	// async newSignupWithGithub(code: string) {
-	// 	try {
-  //   	const res = await axios.post(`${this.baseUrl}/api/users/github`, { code });
-	// 		return { success: true, res: res as any };
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 		return { success: false, error };
-	// 	}
-  // },
-	async newSignupWithGithub(code: string, client_id: string, client_secret: string, redirect_uri: string) {
+	async signupWithGithub(code: string) {
 		try {
-    	const res = await axios.post("https://github.com/login/oauth/access_token", { code, client_id, client_secret, redirect_uri });
+    	const res = await axios.post(`${this.baseUrl}/api/users/github`, { code });
 			return { success: true, res: res as any };
 		} catch (error) {
 			console.error(error);
