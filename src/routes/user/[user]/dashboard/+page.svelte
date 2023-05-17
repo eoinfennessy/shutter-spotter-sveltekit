@@ -17,7 +17,7 @@
 				lat: location.latitude,
 				lng: location.longitude,
 			},
-			popupText: location.name,
+			popupText: `<a href="/user/${location.userId}/location/${location._id}">${location.name}</a>`,
 			layerTitle: location.category,
 		}
 	}

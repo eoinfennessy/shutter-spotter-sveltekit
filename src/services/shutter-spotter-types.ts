@@ -84,3 +84,11 @@ export type Photo = {
 	userId: string;
 	_id: string;
 };
+
+// User
+
+export type LoggedInUser = {
+	email: string;
+	token: string;
+	_id: string;
+}

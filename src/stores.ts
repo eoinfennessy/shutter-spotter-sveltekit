@@ -1,12 +1,8 @@
-import type { Location, Photo } from "$services/shutter-spotter-types";
+import type { Location, LoggedInUser, Photo } from "$services/shutter-spotter-types";
 import {writable} from "svelte/store";
 import type { MapMarker } from "./services/leaflet-map-types";
 
-export const user = writable({
-  _id: "",
-  email: "",
-  token: "",
-});
+export const user = writable<LoggedInUser>();
 
 export const latestLocation = writable<Location>();
 

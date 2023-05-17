@@ -15,8 +15,8 @@
   <div class="column">
     <i class="fas fa-camera fa-3x" style="color:rgb(95, 96, 173)" />
     <div class="is-size-7">
-      {#if $user.email}
-        {$user.email}
+      {#if $user?.email}
+        {$user?.email}
       {:else}
         ShutterSpotter
       {/if}
