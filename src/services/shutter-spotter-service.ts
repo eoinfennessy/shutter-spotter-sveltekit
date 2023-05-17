@@ -1,10 +1,10 @@
 import axios, { AxiosError } from "axios";
 import { user } from "../stores";
 import type { NewLocation, Location, Photo, PhotoApiPayload } from "./shutter-spotter-types";
+import { PUBLIC_BACKEND_HOST } from "$env/static/public";
 
 export const shutterSpotterService = {
-	baseUrl: "http://localhost:3000",
-	// baseUrl: "https://shutter-spotter-2.onrender.com",
+	baseUrl: PUBLIC_BACKEND_HOST,
 
 	async login(email: string, password: string) {
 		try {

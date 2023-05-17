@@ -3,11 +3,10 @@
 	import { shutterSpotterService } from "$services/shutter-spotter-service";
 	import type { Writable } from "svelte/store";
 	import { onDestroy } from "svelte";
+	import { PUBLIC_IMAGE_SERVER_HOST } from "$env/static/public"
 
 	export let photos: Photo[];
-	export let photoStore: Writable<Photo>
-
-  const imageServerBaseUrl = localStorage.getItem("imageServerBaseUrl");
+	export let photoStore: Writable<Photo>;
 
 	const unsubscribe = photoStore.subscribe((photo) => {
 		if (photo) {
@@ -48,7 +47,7 @@
 					{photo.description}
 				</td>
 				<td>
-					<img src="{imageServerBaseUrl}{photo.img}" alt={photo.title} />
+					<img src="{PUBLIC_IMAGE_SERVER_HOST}{photo.img}" alt={photo.title} />
 				</td>
 				<td>
 					{#each photo.tags as tag}
