@@ -1,5 +1,6 @@
 <script>
 	import { goto } from "$app/navigation";
+	import { page } from "$app/stores";
 	import { shutterSpotterService } from "../services/shutter-spotter-service";
 
 	let firstName = "";
@@ -18,7 +19,7 @@
 	}
 
 	async function signupWithGithub() {
-		await shutterSpotterService.signupWithGithub();
+		goto(`https://github.com/login/oauth/authorize?client_id=c5fd3ee59927414f8114&redirect_uri=${$page.url.origin}/signup/github`)
 	}
 </script>
 

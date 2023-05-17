@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { shutterSpotterService } from '../services/shutter-spotter-service';
 	import { user } from '../stores';
+	import { page } from '$app/stores';
 
 	let email = "";
 	let password = "";
@@ -19,7 +20,7 @@
 	}
 
 	async function loginWithGithub() {
-		console.log("TODO: Log in with GitHub")
+		goto(`https://github.com/login/oauth/authorize?client_id=c5fd3ee59927414f8114&redirect_uri=${$page.url.origin}/login/github`)
 	}
 </script>
 
