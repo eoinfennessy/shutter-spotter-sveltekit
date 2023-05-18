@@ -12,21 +12,40 @@
 
 	$: imageDisplayName = imagefile ? imagefile[0].name : "No File Selected";
 
+	async function hello() {
+		const res = await shutterSpotterService.testNetlifyFunctionHello($page.url.origin)
+		console.log(res);
+	}
+
 	async function addPhoto() {
-		const { success, photo } = await shutterSpotterService.createPhoto({
-			userId: $user._id,
-			locationId: $page.params.location,
-			imagefile: imagefile[0],
-			title,
-			description,
-			tags,
-		});
-		if (success) {
-			onAdd(photo);
-			title = "";
-			description = "";
-			tags = "";
-		}
+		// console.log(imagefile[0])
+		const buff = await imagefile[0].arrayBuffer();
+		// console.log(buff);
+		const bytes = new Uint8Array(buff)
+		// console.log(bytes);
+		let binary = "";
+		for (let i = 0; i < bytes.byteLength; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    const base64 = window.btoa(binary);
+		console.log(base64);
+		const res = await shutterSpotterService.testNetlifyFunctionGrayscale(base64, $page.url.origin)
+		console.log(res);
+
+		// const { success, photo } = await shutterSpotterService.createPhoto({
+		// 	userId: $user._id,
+		// 	locationId: $page.params.location,
+		// 	imagefile: imagefile[0],
+		// 	title,
+		// 	description,
+		// 	tags,
+		// });
+		// if (success) {
+		// 	onAdd(photo);
+		// 	title = "";
+		// 	description = "";
+		// 	tags = "";
+		// }
 	}
 </script>
 
@@ -96,3 +115,5 @@
 	</div>
 	<button class="button is-primary">Add Photo</button>
 </form>
+
+<button on:click={hello} class="button is-primary">Hello</button>
