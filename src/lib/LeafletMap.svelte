@@ -1,5 +1,5 @@
 <script lang="ts">
-	import "leaflet/dist/leaflet.css";
+	// import "leaflet/dist/leaflet.css";
 	import { LeafletMap } from "../services/leaflet-map";
 	import { onDestroy, onMount } from "svelte";
 	import type { MapMarker } from "$src/services/leaflet-map-types";
