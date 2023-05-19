@@ -32,7 +32,7 @@
 			watermarkText = watermark ? watermarkText : "";
 			const res = await fnService.processImage(base64image, sharpen, greyscale, watermarkText);
 			console.log(res);
-			if (res.success) processedImageArray = base64.parse(res.data);
+			if (res.success) processedImageArray = base64.parse(res.data.image);
 		}
 
 		const { success, photo } = await shutterSpotterService.createPhoto({
