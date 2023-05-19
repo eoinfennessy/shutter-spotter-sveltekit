@@ -21,6 +21,10 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
 		let img = sharp(Buffer.from(event.body, "base64"));
 		const imgMetadata = await img.metadata();
 
+		console.log(process.env.PWD)
+		console.log(process.env.FONTCONFIG_PATH)
+		console.log(process.env.FONTCONFIG_FILE)
+
 		if (event.queryStringParameters?.watermark) {
 			img = await addWatermark(
 				event.queryStringParameters.watermark,
