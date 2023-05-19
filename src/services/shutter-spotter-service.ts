@@ -211,24 +211,4 @@ export const shutterSpotterService = {
 			return { success: false, error } as { success: false; error: AxiosError };
 		}
 	},
-
-	async testNetlifyFunctionHello(baseUrl: string) {
-		try {
-			const res = await axios.get(`${baseUrl}/.netlify/functions/hello`);
-			return { success: true, data: res.data };
-		} catch (error) {
-			console.error(error);
-			return { success: false, error } as { success: false; error: AxiosError };
-		}
-	},
-	
-	async testNetlifyFunctionGrayscale(img: any, baseUrl: string) {
-		try {
-			const res = await axios.post(`${baseUrl}/.netlify/functions/grayscale`, img);
-			return { success: true, data: res.data };
-		} catch (error) {
-			console.error(error);
-			return { success: false, error } as { success: false; error: AxiosError };
-		}
-	}
 };

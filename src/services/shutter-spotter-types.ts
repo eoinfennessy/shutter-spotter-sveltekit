@@ -65,7 +65,7 @@ export type Vote = {
 export type PhotoApiPayload = {
 	title: string;
 	description: string;
-	imagefile: File | string;
+	imagefile: File | ArrayBuffer | Uint8Array;
 	tags: string;
 	userId: string;
 	locationId: string;
