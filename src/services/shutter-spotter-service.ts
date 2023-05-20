@@ -142,6 +142,16 @@ export const shutterSpotterService = {
 		}
 	},
 
+	async getUserPhotos(userId: string): Promise<Photo[]> {
+		try {
+			const res = await axios.get(`${this.baseUrl}/api/users/${userId}/photos`);
+			return res.data;
+		} catch (error) {
+			console.error(error);
+			return [];
+		}
+	},
+
 	async getLocationPhotos(locationId: string): Promise<Photo[]> {
 		try {
 			const res = await axios.get(`${this.baseUrl}/api/locations/${locationId}/photos`);
