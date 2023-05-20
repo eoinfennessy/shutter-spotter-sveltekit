@@ -146,6 +146,7 @@
 					trend.regressionModel.yIntercept
 				);
 				chartData.buckets.push(...projectionBuckets);
+				projections.forEach(() => chartData.datasets[0].values.push(0));
 				chartData.datasets[1].values.push(...projections);
 			}
 		}

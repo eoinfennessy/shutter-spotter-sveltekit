@@ -1,3 +1,5 @@
+<!-- Based on https://github.com/berkinakkaya/svelte-image-gallery -->
+
 <script lang="ts">
 	import { onMount, createEventDispatcher } from "svelte";
 
