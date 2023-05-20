@@ -17,13 +17,8 @@ async function addWatermark(text: string, image: Sharp, width: number, height: n
 
 export const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
 	if (event.body !== null) {
-		console.log(event.queryStringParameters);
 		let img = sharp(Buffer.from(event.body, "base64"));
 		const imgMetadata = await img.metadata();
-
-		console.log(process.env.PWD)
-		console.log(process.env.FONTCONFIG_PATH)
-		console.log(process.env.FONTCONFIG_FILE)
 
 		if (event.queryStringParameters?.watermark) {
 			img = await addWatermark(

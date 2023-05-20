@@ -19,11 +19,6 @@
 
 	$: imageDisplayName = imagefile ? imagefile[0].name : "No File Selected";
 
-	async function hello() {
-		const res = await fnService.hello();
-		console.log(res);
-	}
-
 	async function addPhoto() {
 		let processedImageArray;
 		if (watermark || sharpen || greyscale) {
@@ -31,7 +26,6 @@
 			const base64image = base64.stringify(new Uint8Array(imageBuffer));
 			watermarkText = watermark ? watermarkText : "";
 			const res = await fnService.processImage(base64image, sharpen, greyscale, watermarkText);
-			console.log(res);
 			if (res.success) processedImageArray = base64.parse(res.data.image);
 		}
 
@@ -150,5 +144,3 @@
 	</div>
 	<button class="button is-primary">Add Photo</button>
 </form>
-
-<button on:click={hello} class="button is-primary">Hello</button>
