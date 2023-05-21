@@ -26,6 +26,10 @@
 		showModal(photo);
 	}
 
+	function onModalClose(e: any) {
+		photoModal.set(null);
+	}
+
 	const unsubscribers: Unsubscriber[] = [];
 
 	unsubscribers.push(
@@ -54,7 +58,7 @@
 	});
 </script>
 
-<Modal show={$photoModal} styleWindow={{ width: 'fit-content', maxWidth: "800px" }} />
+<Modal on:close={onModalClose} show={$photoModal} styleWindow={{ width: 'fit-content', maxWidth: "800px" }} />
 
 <div class="box">
 	<ImageGallery
