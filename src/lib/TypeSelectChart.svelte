@@ -13,7 +13,7 @@
 <fieldset class="control">
 	<legend>Select Chart Type:</legend>
   {#each chartTypes as chartType}
-    <label class="radio" for="bar">
+    <label class="radio" for={chartType}>
       <input bind:group={type} type="radio" id={chartType} name={chartType} value={chartType} />
       {chartType}
     </label>
