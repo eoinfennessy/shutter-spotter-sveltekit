@@ -2,7 +2,7 @@
 	// import "leaflet/dist/leaflet.css";
 	import { LeafletMap } from "../services/leaflet-map";
 	import { onDestroy, onMount } from "svelte";
-	import type { MapMarker } from "$src/services/leaflet-map-types";
+	import type { MapMarker, Overlay } from "$src/services/leaflet-map-types";
 	import type { Writable } from "svelte/store";
 
 	export let showZoomControl = false;
@@ -13,6 +13,7 @@
 	export let markers: MapMarker[] = [];
 	export let latestMapMarker: Writable<MapMarker> | null = null;
 	export let initialMapPostion = markers.length ? markers[0].coordinates : { lat: 52.160858, lng: -7.15242 }
+	export let overlays: Overlay[] = [];
 
 	const mapConfig = {
 		location: initialMapPostion,
@@ -23,7 +24,7 @@
 	let map: LeafletMap;
 
 	onMount(async () => {
-		map = new LeafletMap(id, mapConfig);
+		map = new LeafletMap(id, mapConfig, overlays);
 		if (showZoomControl) map.showZoomControl();
 		markers.forEach((marker) => {
 			map.addMarker(marker.coordinates, marker.popupText, marker.layerTitle);

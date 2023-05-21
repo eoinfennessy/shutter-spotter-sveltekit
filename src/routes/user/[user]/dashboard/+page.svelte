@@ -1,32 +1,33 @@
 <script lang="ts">
+	import { onDestroy } from "svelte";
 	import Header from "$lib/Header.svelte";
 	import LocationList from "$lib/LocationList.svelte";
 	import LocationForm from "$lib/LocationForm.svelte";
 	import MainNavigator from "$lib/MainNavigator.svelte";
+	import LeafletMap from "$lib/LeafletMap.svelte";
+	import { PUBLIC_OPEN_WEATHER_MAP_APP_ID } from "$env/static/public";
 	import { latestLocation, latestMapMarker } from "$src/stores";
-	import LeafletMap from "$src/lib/LeafletMap.svelte";
-	import type { Location } from "$src/services/shutter-spotter-types.js";
-	import { onDestroy } from "svelte";
-	import type { MapMarker } from "$src/services/leaflet-map-types.js";
+	import { createMapMarker, createOpenWeatherMapOverlay } from "$src/utils/map-utils.js";
+	import type { OpenWeatherMapType } from "$src/utils/map-utils.js";
 
 	export let data;
 
-	function createMapMarker(location: Location): MapMarker {
-		return {
-			coordinates: {
-				lat: location.latitude,
-				lng: location.longitude,
-			},
-			popupText: `<a href="/user/${location.userId}/location/${location._id}">${location.name}</a>`,
-			layerTitle: location.category,
-		}
-	}
-	
+	const openWeatherMapOverlayTypes: OpenWeatherMapType[] = [
+		"Clouds",
+		"Precipitation",
+		"Pressure",
+		"Wind",
+		"Temperature",
+	];
+	const overlays = openWeatherMapOverlayTypes.map((type) =>
+		createOpenWeatherMapOverlay(type, PUBLIC_OPEN_WEATHER_MAP_APP_ID)
+	);
+
 	const markers = data.locations.map(createMapMarker);
 
 	const unsubscribe = latestLocation.subscribe((location) => {
 		if (location) {
-			const marker = createMapMarker(location)
+			const marker = createMapMarker(location);
 			latestMapMarker.set(marker);
 		}
 	});
@@ -44,9 +45,10 @@
 		style="height: 75vh;"
 		showZoomControl={true}
 		showLayerControl={true}
-		markers={markers}
-		latestMapMarker={latestMapMarker}
+		{markers}
+		{latestMapMarker}
+		{overlays}
 	/>
-	<LocationList locations={data.locations} latestLocation={latestLocation} />
+	<LocationList locations={data.locations} {latestLocation} />
 	<LocationForm onAdd={latestLocation.set} />
 </section>

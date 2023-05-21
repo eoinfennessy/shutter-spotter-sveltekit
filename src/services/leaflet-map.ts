@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-nocheck
 import * as L from "leaflet";
+import type { Overlay } from "./leaflet-map-types";
 
 export class LeafletMap {
 	imap = {};
@@ -24,7 +25,10 @@ export class LeafletMap {
 		),
 	};
 
-	constructor(id, descriptor, activeLayer = "") {
+	constructor(id, descriptor, overlays: Overlay[] = [], activeLayer = "") {
+		overlays.forEach((overlay) => {
+			this.overlays[overlay.name] = L.tileLayer(overlay.url, overlay.options)
+		});
 		let defaultLayer = this.baseLayers.Terrain;
 		if (activeLayer) {
 			defaultLayer = this.baseLayers[activeLayer];
