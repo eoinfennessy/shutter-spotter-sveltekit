@@ -91,4 +91,15 @@ export type LoggedInUser = {
 	email: string;
 	token: string;
 	_id: string;
-}
+};
+
+export type User = {
+	firstName: string;
+	lastName: string;
+	email: string;
+	timeCreated: string;
+	scope: string[];
+	password?: string;
+	avatarSrc?: string;
+	_id: string;
+};

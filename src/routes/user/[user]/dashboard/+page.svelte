@@ -3,6 +3,7 @@
 	import LocationList from "$lib/LocationList.svelte";
 	import LocationForm from "$lib/LocationForm.svelte";
 	import LeafletMap from "$lib/LeafletMap.svelte";
+	import UserWelcome from "$lib/UserWelcome.svelte";
 	import { PUBLIC_OPEN_WEATHER_MAP_APP_ID } from "$env/static/public";
 	import { latestLocation, latestMapMarker } from "$src/stores";
 	import { createMapMarker, createOpenWeatherMapOverlay } from "$src/utils/map-utils.js";
@@ -33,7 +34,10 @@
 </script>
 
 <section class="section">
-	<h1 class="title">My Dashboard</h1>
+	<UserWelcome
+		user={data.user}
+		message={"Welcome to your dashboard, where you can view your locations and add new ones."}
+	/>
 	<LeafletMap
 		id="hero-map"
 		style="height: 75vh;"

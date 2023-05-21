@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { user } from "../stores";
-import type { NewLocation, Location, Photo, PhotoApiPayload } from "./shutter-spotter-types";
+import type { NewLocation, Location, Photo, PhotoApiPayload, User } from "./shutter-spotter-types";
 import { PUBLIC_BACKEND_HOST } from "$env/static/public";
 
 export const shutterSpotterService = {
@@ -81,6 +81,16 @@ export const shutterSpotterService = {
 		}
 	},
 
+	async getUser(id: string) {
+		try {
+			const res = await axios.get(`${this.baseUrl}/api/users/${id}`);
+			return { success: true as const, user: res.data as User };
+		} catch (error) {
+			console.error(error);
+			return { success: false as const, error };
+		}
+	},
+
 	async createLocation(location: NewLocation, userId: string) {
 		try {
 			const res = await axios.post(`${this.baseUrl}/api/locations`, { ...location, userId });
@@ -94,17 +104,12 @@ export const shutterSpotterService = {
 	async getLocation(id: string, includeWeather = false) {
 		try {
 			const res = await axios.get(`${this.baseUrl}/api/locations/${id}?includeweather=${includeWeather}`);
-			return { success: true, location: res.data as Location };
+			return { success: true as const, location: res.data as Location };
 		} catch (error) {
 			console.error(error);
-			return { success: false, error };
+			return { success: false as const, error };
 		}
 	},
-
-	// async getAllLocations() {
-	//   const res = await axios.get(`${this.baseUrl}/api/locations`);
-	//   return res.data;
-	// },
 
 	async getUserLocations(userId: string): Promise<Location[]> {
 		try {
