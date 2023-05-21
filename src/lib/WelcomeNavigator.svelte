@@ -1,8 +1,18 @@
-<div class="box has-text-centered columns m-2">
-  <a href="/signup" class="column">
-    <i class="fas fa-user-cog fa-3x" style="color:rgb(63, 160, 155)"></i>
-  </a>
-  <a href="/login" class="column">
-    <i class="fas fa-user-edit fa-3x" style="color:green" title="Log in"></i>
-  </a>
+<div class="navbar-end">
+	<div class="navbar-item">
+		<div class="buttons">
+			<a href="/signup" class="button is-primary">
+				<span class="icon">
+					<i class="fa fa-user-plus" />
+				</span>
+				<strong>Sign up</strong>
+			</a>
+			<a href="/login" class="button is-link">
+				<span class="icon">
+					<i class="fa fa-sign-in-alt" />
+				</span>
+				<span> Log in </span>
+			</a>
+		</div>
+	</div>
 </div>

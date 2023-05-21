@@ -12,7 +12,7 @@
 				{weather.current.weather[0].description}
 			</p>
 			<p>Temperature: {weather.current.temp} °C</p>
-			<p>Wind Speed: {weather.current.wind_speed * 3.6} km/h</p>
+			<p>Wind Speed: {+(weather.current.wind_speed * 3.6).toFixed(2)} km/h</p>
 			<p>Wind Direction: {weather.current.wind_deg}</p>
 			<!-- TODO: Verify this works -->
 			<p>Rain: {weather.current.rain ? weather.current.rain["1h"] : 0} mm/h</p>

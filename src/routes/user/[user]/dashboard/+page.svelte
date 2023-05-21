@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from "svelte";
-	import Header from "$lib/Header.svelte";
 	import LocationList from "$lib/LocationList.svelte";
 	import LocationForm from "$lib/LocationForm.svelte";
-	import MainNavigator from "$lib/MainNavigator.svelte";
 	import LeafletMap from "$lib/LeafletMap.svelte";
 	import { PUBLIC_OPEN_WEATHER_MAP_APP_ID } from "$env/static/public";
 	import { latestLocation, latestMapMarker } from "$src/stores";
@@ -33,10 +31,6 @@
 	});
 	onDestroy(unsubscribe);
 </script>
-
-<Header>
-	<MainNavigator />
-</Header>
 
 <section class="section">
 	<h1 class="title">My Dashboard</h1>
