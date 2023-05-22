@@ -71,12 +71,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	.graph-svg-tip, .graph-svg-tip > .svg-pointer{
-        background: #fff;
-    }
-    .graph-svg-tip > .title, .graph-svg-tip > .title > strong {
-        color: #000;
-    }
-</style>
