@@ -48,18 +48,18 @@
 				/>
 			</div>
 
-			<div class="tile is-parent media">
+			<div class="tile is-parent media" style="position:relative;">
 				<div class="tile is-child">
 					<h2 class="title">
 						{location.name}
-						<span class="tag is-primary block">
-							{location.category}
-						</span>
 					</h2>
+					<span class="tag is-primary block">
+						{location.category}
+					</span>
 					<p class="block">
 						{location.description}
 					</p>
-					<p />
+					<div style="position: absolute; bottom: 12px;">
 					<a href="/user/{$user._id}/location/{location._id}" class="button">
 						<span class="icon is-small">
 							<i class="fas fa-folder-open" />
@@ -68,6 +68,7 @@
 					<button on:click={() => deleteLocation(location._id)} class="button">
 						<i class="fas fa-trash" />
 					</button>
+					</div>
 				</div>
 			</div>
 		</div>
