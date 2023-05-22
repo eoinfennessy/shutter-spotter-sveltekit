@@ -3,6 +3,7 @@
 
   export let times: string[] = [];
 	export let range: "month" | "year" = "year";
+	export let options = {};
 
 	const dateCounts = times
 		.map((time) => Math.floor(new Date(new Date(time).toDateString()).valueOf() / 1000))
@@ -30,4 +31,4 @@
 	};
 </script>
 
-<Chart data={heatmapData} type="heatmap" />
+<Chart data={heatmapData} type="heatmap" {...options} />

@@ -11,6 +11,7 @@
 	export let showTrend = true;
 	export let showProjection = false;
 	export let projectionRange = 2;
+	export let frappeChartOptions = {};
 
 	function getBucketFromTimestamp(timestamp: number, bucketSize: BucketSize) {
 		const date = new Date(timestamp);
@@ -170,6 +171,7 @@
 		type="axis-mixed"
 		lineOptions={{ hideDots: 1 }}
 		axisOptions={{ xIsSeries: false }}
+		{...frappeChartOptions}
 	/>
 {/key}
 
