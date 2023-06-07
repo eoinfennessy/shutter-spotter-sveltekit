@@ -1,6 +1,8 @@
 # ShutterSpotter - SvelteKit Frontend
 
-A SvelteKit frontend app for ShutterSpotter, a location-based social app for photographers. The app has been [deployed here](https://shutter-spotter.netlify.app/) (Netlify).
+![ShutterSpotter Frontend](https://github.com/eoinfennessy/shutter-spotter-sveltekit/assets/85010533/e884064c-bae7-42cb-8119-10230dc55474)
+
+A SvelteKit frontend app for ShutterSpotter, a location-based social app for photographers. See [a video demonstration of the app here](https://youtu.be/pJwE0ppTp6k). This app has been [deployed on Netlify here](https://shutter-spotter.netlify.app/).
 
 This app uses APIs from the ShutterSpotter backend ([Github Repo](https://github.com/eoinfennessy/shutter-spotter) | [Deployment on Render](https://shutter-spotter-2.onrender.com/)).
 
